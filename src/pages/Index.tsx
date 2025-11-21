@@ -8,8 +8,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { toast } from 'sonner';
+import Game3D from '@/components/Game3D';
 
-type Screen = 'menu' | 'game' | 'settings' | 'achievements' | 'tutorial';
+type Screen = 'menu' | 'game' | 'game3d' | 'settings' | 'achievements' | 'tutorial';
 
 interface GameSettings {
   soundVolume: number;
@@ -108,11 +109,22 @@ const Index = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl w-full">
         <Card 
           className="p-8 hover:scale-105 transition-all duration-300 cursor-pointer bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-0 shadow-xl"
+          onClick={() => setScreen('game3d')}
+        >
+          <div className="flex flex-col items-center gap-4">
+            <Icon name="Gamepad2" size={48} />
+            <h2 className="text-2xl font-bold">3D Школа</h2>
+            <p className="text-center opacity-90">Балди и блокноты!</p>
+          </div>
+        </Card>
+
+        <Card 
+          className="p-8 hover:scale-105 transition-all duration-300 cursor-pointer bg-gradient-to-br from-primary/70 to-primary/50 text-primary-foreground border-0 shadow-xl"
           onClick={() => setScreen('game')}
         >
           <div className="flex flex-col items-center gap-4">
             <Icon name="Play" size={48} />
-            <h2 className="text-2xl font-bold">Начать игру</h2>
+            <h2 className="text-2xl font-bold">Классический режим</h2>
             <p className="text-center opacity-90">Решай задачи и побеждай!</p>
           </div>
         </Card>
@@ -559,6 +571,7 @@ const Index = () => {
   return (
     <>
       {screen === 'menu' && <MenuScreen />}
+      {screen === 'game3d' && <Game3D onExit={() => setScreen('menu')} />}
       {screen === 'game' && <GameScreen />}
       {screen === 'settings' && <SettingsScreen />}
       {screen === 'achievements' && <AchievementsScreen />}
